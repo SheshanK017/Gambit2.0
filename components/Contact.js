@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
-const s=require("/home/sheshank/Desktop/taskgambit/gambit/assets/User_cicrle_light.png");
-const s1=require("/home/sheshank/Desktop/taskgambit/gambit/assets/Group 23.png");
+const s=require("../assets/User_cicrle_light.png");
+const s1=require("../assets/Group 23.png");
 const Contact = () => {
   const [name, setName] = useState('');
   const [nickname, setNickname] = useState('');
