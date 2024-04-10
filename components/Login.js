@@ -2,25 +2,16 @@ import { LinearGradient } from 'expo-linear-gradient';
 import React, { useState } from 'react';
 import { Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 const s = require("../assets/User_cicrle_light.png");
-const s1 = require("../assets/Group 23.png");
 
-const Contact = ({navigation}) => {
-  const [name, setName] = useState('');
-  const [nickname, setNickname] = useState('');
+const Contact = ({ navigation }) => {
   const [email, setEmail] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState('');
   const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
 
   const handleSubmit = () => {
     // Here you can handle form submission
-    console.log('Name:', name);
-    console.log('Nickname:', nickname);
     console.log('Email:', email);
-    console.log('Phone Number:', phoneNumber);
     console.log('Password:', password);
-    console.log('Confirm Password:', confirmPassword);
-    navigation.navigate('FindPartner', { name });
+    navigation.navigate('FindPartner', { name: 'User Name' }); // Assuming name for demo
   };
 
   return (
@@ -39,29 +30,12 @@ const Contact = ({navigation}) => {
         <Image source={s} style={styles.image} />
       </View>
       <View style={styles.formContainer}>
-        <Text style={styles.label}>Name:</Text>
-        <TextInput
-          style={styles.input}
-          value={name}
-          onChangeText={text => setName(text)}
-        />
-
-     
-
         <Text style={styles.label}>Email:</Text>
         <TextInput
           style={styles.input}
           value={email}
           onChangeText={text => setEmail(text)}
           keyboardType="email-address"
-        />
-
-        <Text style={styles.label}>Phone Number:</Text>
-        <TextInput
-          style={styles.input}
-          value={phoneNumber}
-          onChangeText={text => setPhoneNumber(text)}
-          keyboardType="phone-pad"
         />
 
         <Text style={styles.label}>Password:</Text>
@@ -72,11 +46,8 @@ const Contact = ({navigation}) => {
           secureTextEntry={true}
         />
 
-        <TouchableOpacity
-          style={styles.button}
-          onPress={handleSubmit}
-        >
-          <Text style={styles.buttonText}>Continue</Text>
+        <TouchableOpacity style={styles.button} onPress={handleSubmit}>
+          <Text style={styles.buttonText}>LOGIN</Text>
         </TouchableOpacity>
       </View>
     </LinearGradient>
@@ -93,10 +64,6 @@ const styles = StyleSheet.create({
   },
   image: {
     width: 100,
-    height: 100,
-  },
-  image1: {
-    width: 200,
     height: 100,
   },
   formContainer: {
@@ -131,12 +98,11 @@ const styles = StyleSheet.create({
   buttonText: {
     color: '#0BF6E7',
     textAlign: 'center',
-    fontWeight:"bold"
+    fontWeight: 'bold',
   },
-  dd:{
-    color:'#0BF6E7',
-    
-  }
+  dd: {
+    color: '#0BF6E7',
+  },
 });
 
 export default Contact;

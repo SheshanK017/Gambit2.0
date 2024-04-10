@@ -8,6 +8,9 @@ export default function Home({navigation}) {
   const handleContinuePress = () => {
     navigation.navigate('contactpage');
   };
+  const handleContinuePress1= () => {
+    navigation.navigate('Login');
+  };
 
   return (
     <LinearGradient
@@ -22,7 +25,10 @@ export default function Home({navigation}) {
         <Image source={imageSource} style={styles.image} />
       </View>
       <TouchableOpacity style={styles.button} onPress={handleContinuePress}>
-        <Text style={styles.buttonText}>START</Text>
+        <Text style={styles.buttonText}>SIGN UP</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.button} onPress={handleContinuePress1}>
+        <Text style={styles.buttonText}>LOGIN</Text>
       </TouchableOpacity>
     </LinearGradient>
   );
