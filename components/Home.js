@@ -4,10 +4,9 @@ import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 const imageSource = require("../assets/Task_Gambit_Logo.png"); // Assuming this is the path to your image
 
-export default function Home() {
+export default function Home({navigation}) {
   const handleContinuePress = () => {
-    // Handle button press logic here (e.g., navigation)
-    console.log('Continue button pressed');
+    navigation.navigate('contactpage');
   };
 
   return (
