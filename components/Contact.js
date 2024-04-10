@@ -45,12 +45,7 @@ const Contact = () => {
           onChangeText={text => setName(text)}
         />
 
-        <Text style={styles.label}>Nickname:</Text>
-        <TextInput
-          style={styles.input}
-          value={nickname}
-          onChangeText={text => setNickname(text)}
-        />
+     
 
         <Text style={styles.label}>Email:</Text>
         <TextInput
@@ -73,14 +68,6 @@ const Contact = () => {
           style={styles.input}
           value={password}
           onChangeText={text => setPassword(text)}
-          secureTextEntry={true}
-        />
-
-        <Text style={styles.label}>Confirm Password:</Text>
-        <TextInput
-          style={styles.input}
-          value={confirmPassword}
-          onChangeText={text => setConfirmPassword(text)}
           secureTextEntry={true}
         />
 
