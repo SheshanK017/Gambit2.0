@@ -11,7 +11,7 @@ const Stack = createStackNavigator();
 export default function App() {
   return (
     <NavigationContainer>
-    <Stack.Navigator initialRouteName="contactpage" screenOptions={{ headerShown: false }}>
+    <Stack.Navigator initialRouteName="FirstPage" screenOptions={{ headerShown: false }}>
       <Stack.Screen name="FirstPage" component={Home} />
       <Stack.Screen name="SecondPage" component={SecondPage} />
       <Stack.Screen name="contactpage" component={Contact}/>
