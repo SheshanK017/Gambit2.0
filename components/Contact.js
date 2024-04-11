@@ -1,6 +1,9 @@
 import { LinearGradient } from 'expo-linear-gradient';
 import React, { useState } from 'react';
 import { Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../config/firebase';
+
 const s = require("../assets/User_cicrle_light.png");
 const s1 = require("../assets/Group 23.png");
 
@@ -21,6 +24,14 @@ const Contact = ({navigation}) => {
     console.log('Password:', password);
     console.log('Confirm Password:', confirmPassword);
     navigation.navigate('FindPartner', { name });
+  };
+
+  const onHandleSignup = () => {
+    if (email !== '' && password !== '') {
+  createUserWithEmailAndPassword(auth, email, password)
+        .then(() => console.log('Signup success'))
+        .catch((err) => Alert.alert("Login error", err.message));
+    }
   };
 
   return (
@@ -74,7 +85,7 @@ const Contact = ({navigation}) => {
 
         <TouchableOpacity
           style={styles.button}
-          onPress={handleSubmit}
+          onPress={onHandleSignup,handleSubmit}
         >
           <Text style={styles.buttonText}>Continue</Text>
         </TouchableOpacity>

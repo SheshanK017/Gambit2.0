@@ -1,11 +1,24 @@
 import { LinearGradient } from 'expo-linear-gradient';
 import React, { useState } from 'react';
 import { Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../config/firebase";
+
 const s = require("../assets/User_cicrle_light.png");
+
 
 const Contact = ({ navigation }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+
+    const onHandleLogin = () => {
+    if (email !== "" && password !== "") {
+      signInWithEmailAndPassword(auth, email, password)
+        .then(() => console.log("Login success"))
+        .catch((err) => Alert.alert("Login error", err.message));
+    }
+  };
+  
 
   const handleSubmit = () => {
     // Here you can handle form submission
@@ -46,7 +59,7 @@ const Contact = ({ navigation }) => {
           secureTextEntry={true}
         />
 
-        <TouchableOpacity style={styles.button} onPress={handleSubmit}>
+        <TouchableOpacity style={styles.button} onPress={onHandleLogin,handleSubmit}>
           <Text style={styles.buttonText}>LOGIN</Text>
         </TouchableOpacity>
       </View>
