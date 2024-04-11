@@ -17,11 +17,15 @@ import { signOut } from 'firebase/auth';
 import { auth, firestore } from '../config/firebase.js';
 import { useNavigation } from '@react-navigation/native';
 import { AntDesign } from '@expo/vector-icons';
+import TopTabBar from './TopTabBar.js';
+import { View } from 'react-native-web';
 // import colors from '../colors';
 
 export default function Chat() {
   const [messages, setMessages] = useState([]);
   const navigation = useNavigation();
+  const [timerValue, setTimerValue] = useState(null); // For managing timer state (optional)
+  const [coinsLeft, setCoinsLeft] = useState(null);
 
   const onSignOut = () => {
     signOut(auth).catch(error => console.log('Error logging out: ', error));
@@ -75,22 +79,32 @@ export default function Chat() {
   }, []);
 
   return (
+    <View style={{ flex: 1 }}>
+    <TopTabBar
+      navigation={navigation}
+      timerValue={timerValue} // Pass timer value if available
+      coinsLeft={coinsLeft} // Pass coins left if available
+    />
+   
+ 
     <GiftedChat
       messages={messages}
       showAvatarForEveryMessage={false}
       showUserAvatar={false}
       onSend={messages => onSend(messages)}
       messagesContainerStyle={{
-        backgroundColor: '#fff'
+        backgroundColor: '#0B1D39'
       }}
       textInputStyle={{
-        backgroundColor: '#fff',
+        backgroundColor: 'white',
         borderRadius: 20,
       }}
       user={{
         _id: auth?.currentUser?.email,
         avatar: 'https://i.pravatar.cc/300'
       }}
+
     />
+     </View>
   );
 }

@@ -4,7 +4,7 @@ import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
 const tasks = ['Task 1', 'Task 2', 'Task 3'];
 
-const Dropdown = () => {
+const Dropdown = ({navigation}) => {
   const [isLoading, setIsLoading] = useState(true); // Initial loading state
   const [selectedTask, setSelectedTask] = useState('');
   const [dropdownVisible, setDropdownVisible] = useState(false);
@@ -21,6 +21,9 @@ const Dropdown = () => {
     setSelectedTask(task);
     setDropdownVisible(false);
   };
+  const handleClick =()=>{
+    navigation.navigate('Chat');
+  }
 
   const content = ( // Separate component for content
     
@@ -41,7 +44,7 @@ const Dropdown = () => {
           ))}
         </View>
       )}
-      <TouchableOpacity style={styles.continueButton} onPress={() => console.log('Continue button pressed')}>
+      <TouchableOpacity style={styles.continueButton} onPress={handleClick}>
         <Text style={styles.continueButtonText}>Continue</Text>
       </TouchableOpacity>
     </View>
