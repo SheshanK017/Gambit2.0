@@ -12,7 +12,7 @@ const FindPartner = ({navigation}) => {
  const [groupsCollectionRef, setGroupsCollectionRef] = useState(null);
   const [groups, setGroups] = useState([]);
   const handleContinuePress=()=>{
-    navigation.navigate('TaskSelection');
+    navigation.navigate('Chat');
   }
 
     useEffect(() => {

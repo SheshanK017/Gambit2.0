@@ -63,10 +63,14 @@ const Contact = ({navigation}) => {
 
         <Text style={styles.label}>Email:</Text>
         <TextInput
-          style={styles.input}
-          value={email}
-          onChangeText={text => setEmail(text)}
-          keyboardType="email-address"
+            style={styles.input}
+        placeholder="Enter your email"
+        autocomplete="none"
+        keyboardType="email-address"
+        textContentType="emailAddress"
+        autoFocus={true}
+        value={email}
+        onChangeText={(text) => setEmail(text)}
         />
 
         <Text style={styles.label}>Phone Number:</Text>
@@ -79,10 +83,14 @@ const Contact = ({navigation}) => {
 
         <Text style={styles.label}>Password:</Text>
         <TextInput
-          style={styles.input}
-          value={password}
-          onChangeText={text => setPassword(text)}
-          secureTextEntry={true}
+           style={styles.input}
+        placeholder="Enter your password"
+        autocomplete="none"
+        secureTextEntry={true}
+        textContentType="password"
+        autoCorrect={false}
+        value={password}
+        onChangeText={(text) => setPassword(text)}
         />
 
         <TouchableOpacity
@@ -91,6 +99,12 @@ const Contact = ({navigation}) => {
         >
           <Text style={styles.buttonText}>Continue</Text>
         </TouchableOpacity>
+         <Text
+        style={styles.loginButton}
+        onPress={() => navigation.navigate('Login')}
+      >
+        Already have an account? Login
+      </Text>
       </View>
     </LinearGradient>
   );

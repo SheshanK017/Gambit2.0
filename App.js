@@ -8,6 +8,7 @@ import Navbar from "./components/Navbar";
 import SecondPage from './components/SecondPage';
 import Ss from "./components/Ss";
 import TaskSelection from "./components/TaskSelection";
+import Chat from  './components/Chat'
 
 const Stack = createStackNavigator();
 
@@ -23,6 +24,7 @@ export default function App() {
       <Stack.Screen name="TaskSelection" component={TaskSelection}/>
       <Stack.Screen name="ss" component={Ss}/>
       <Stack.Screen name="Login" component={Login}/>
+      <Stack.Screen name="Chat" component={Chat}/>
     </Stack.Navigator>
   </NavigationContainer>
   );
