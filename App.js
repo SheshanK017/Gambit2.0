@@ -3,11 +3,11 @@ import { createStackNavigator } from "@react-navigation/stack";
 import Contact from "./components/Contact";
 import FindPartner from "./components/FindPartner";
 import Home from './components/Home';
+import Login from "./components/Login";
 import Navbar from "./components/Navbar";
 import SecondPage from './components/SecondPage';
 import Ss from "./components/Ss";
 import TaskSelection from "./components/TaskSelection";
-import Login from "./components/Login";
 
 const Stack = createStackNavigator();
 

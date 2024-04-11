@@ -1,7 +1,7 @@
 import { LinearGradient } from 'expo-linear-gradient';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
 import React, { useState } from 'react';
 import { Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../config/firebase';
 
 const s = require("../assets/User_cicrle_light.png");
@@ -36,11 +36,13 @@ const Contact = ({navigation}) => {
 
   return (
     <LinearGradient
-      colors={[
-        '#380b42', '#391746', '#3a204a', '#3c284d', '#3e3050',
-        '#403152', '#413154', '#433256', '#452c57', '#492458',
-        '#4d1a57', '#520b55'
-      ]}
+    colors={[
+      '#2d3541',
+      '#5b5f6a',
+      '#8c8e95',
+      '#bfbfc3',
+      '#f4f4f4',
+    ]}
       style={styles.container}
     >
       <View style={styles.imageContainer}>
@@ -118,16 +120,17 @@ const styles = StyleSheet.create({
   label: {
     fontSize: 18,
     marginBottom: 5,
-    color: '#0BF6E7',
+    color: '#0B1D39',
   },
   input: {
     height: 40,
-    borderColor: '#0BF6E7',
+    borderColor: '#0B1D39',
     borderWidth: 1,
     marginBottom: 10,
     paddingHorizontal: 10,
     borderRadius: 20,
-    color: '#0BF6E7',
+    color: 'white',
+    backgroundColor:'#0B1D39'
   },
   button: {
     paddingVertical: 15,
@@ -136,16 +139,19 @@ const styles = StyleSheet.create({
     marginTop: 30,
     width: 200,
     alignSelf: 'center',
-    borderColor: '#0BF6E7',
+    borderColor: '#0B1D39',
     borderWidth: 2,
+    backgroundColor:'#0B1D39'
   },
   buttonText: {
-    color: '#0BF6E7',
+    color: 'white',
     textAlign: 'center',
     fontWeight:"bold"
   },
   dd:{
-    color:'#0BF6E7',
+    color:'#0B1D39',
+    fontWeight:"bold",
+    fontSize:30
     
   }
 });

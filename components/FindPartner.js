@@ -1,15 +1,19 @@
 import { useRoute } from '@react-navigation/native';
 import { LinearGradient } from 'expo-linear-gradient';
-import React, { useState, useEffect } from 'react';
+import { collection, onSnapshot } from 'firebase/firestore';
+import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { firestore } from '../config/firebase'; // Import the initialized Firestore instance
-import { collection, onSnapshot } from 'firebase/firestore';
+
 
 const FindPartner = ({navigation}) => {
   const route = useRoute();
   const name = route.params?.name;
  const [groupsCollectionRef, setGroupsCollectionRef] = useState(null);
   const [groups, setGroups] = useState([]);
+  const handleContinuePress=()=>{
+    navigation.navigate('TaskSelection');
+  }
 
     useEffect(() => {
     const ref = collection(firestore, 'cbof');
@@ -33,9 +37,11 @@ const FindPartner = ({navigation}) => {
     <>
       <LinearGradient
         colors={[
-          '#380b42', '#391746', '#3a204a', '#3c284d', '#3e3050',
-          '#403152', '#413154', '#433256', '#452c57', '#492458',
-          '#4d1a57', '#520b55'
+          '#2d3541',
+          '#5b5f6a',
+          '#8c8e95',
+          '#bfbfc3',
+          '#f4f4f4',
         ]}
         style={styles.container}
       >
@@ -56,7 +62,7 @@ const FindPartner = ({navigation}) => {
           </View>
           <TouchableOpacity
             style={styles.but}
-            onPress={()=>{}}
+            onPress={handleContinuePress}
           >
             <Text style={styles.buttonText}>
               FIND PARTNER
@@ -82,12 +88,13 @@ const styles = StyleSheet.create({
       marginTop: 30,
       width: 200,
       alignSelf: 'center',
-      borderColor: '#0BF6E7',
+      borderColor: '0B1D39',
       borderWidth: 4,
+      backgroundColor:'#0B1D39'
             
           },
           buttonText :{
-            color:"#0BF6E7",
+            color: 'white',
             textAlign:"center",
             fontWeight:"800",
             fontSize:16
@@ -104,7 +111,7 @@ const styles = StyleSheet.create({
           hell:{
             fontSize:30,
             fontWeight:"bold",
-            color:"#0BF6E7"
+            color: '#0B1D39',
             
           },
           col:{
@@ -112,7 +119,7 @@ const styles = StyleSheet.create({
           },
           tt:{
             fontSize:20,
-            color:"#0BF6E7"
+            color: '#0B1D39',
           }
 })
 
