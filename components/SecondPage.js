@@ -4,7 +4,7 @@ import { Image, ImageBackground, StyleSheet, Text, TouchableOpacity, View } from
 const SecondPage = () => {
  
   return (
-    <ImageBackground source={require("/home/sheshank/Desktop/taskgambit/gambit/assets/Union.png") }>
+    <ImageBackground source={require("../assets/Union.png") }>
    <View style={styles.conttt}>
     <View style={styles.ss}>
     <Text style={{fontSize:15 , fontWeight:"500" , color:"#4285F4"}}>Sign in using </Text>
@@ -12,7 +12,7 @@ const SecondPage = () => {
    
     <TouchableOpacity  style={styles.buttonContainer}>
               <View style={styles.innerContainer}>
-                <Image source={require("/home/sheshank/Desktop/taskgambit/gambit/assets/googleIcon.png")} style={styles.googleIcon} />
+                <Image source={require("../assets/googleIcon.png")} style={styles.googleIcon} />
                 <Text style={styles.buttonText}> Google</Text>
               </View>
                 
