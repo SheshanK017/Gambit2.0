@@ -2,22 +2,24 @@ import { LinearGradient } from 'expo-linear-gradient';
 import React from "react";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
-const imageSource = require("../assets/Task_Gambit_Logo.png"); // Assuming this is the path to your image
+const imageSource = require("../assets/TaskGambit-Logo.png"); // Assuming this is the path to your image
 
-export default function Home({navigation}) {
+export default function Home({ navigation }) {
   const handleContinuePress = () => {
     navigation.navigate('contactpage');
   };
-  const handleContinuePress1= () => {
+  const handleContinuePress1 = () => {
     navigation.navigate('Login');
   };
 
   return (
     <LinearGradient
       colors={[
-        '#380b42', '#391746', '#3a204a', '#3c284d', '#3e3050',
-        '#403152', '#413154', '#433256', '#452c57', '#492458',
-        '#4d1a57', '#520b55'
+        '#2d3541',
+        '#5b5f6a',
+        '#8c8e95',
+        '#bfbfc3',
+        '#f4f4f4',
       ]}
       style={styles.container}
     >
@@ -42,7 +44,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    bottom:50
+    bottom: 50
   },
   image: {
     width: 350,
@@ -55,17 +57,19 @@ const styles = StyleSheet.create({
     marginTop: 30,
     width: 250,
     alignSelf: 'center',
-    borderColor: '#0BF6E7',
+    backgroundColor: '#0B1D39',
     borderWidth: 4,
-    bottom:180,
-    borderRadius:40
-    
+    bottom: 180,
+    borderRadius: 40
+
   },
   buttonText: {
-    color: "#0BF6E7",
+
+
+    color: '#ffffff',
     textAlign: "center",
-    fontWeight:"bold",
-    fontSize:20,
-    fontFamily:"Tilt Neon"
+    fontWeight: "bold",
+    fontSize: 20,
+    fontFamily: "Sequel_Demo"
   },
 });
