@@ -22,6 +22,7 @@ const AnimatedContent = () => {
   };
 
   return (
+    <>
     <View style={styles.container}>
       {/* Option 1: Using Animated.Value (uncomment for this approach)
       <Animated.View style={[styles.content, { marginTop: marginTopRef.current }]}> */}
@@ -40,6 +41,7 @@ const AnimatedContent = () => {
         <Text style={styles.buttonText}>Trigger Animation</Text>
       </TouchableOpacity>
     </View>
+    </>
   );
 };
 

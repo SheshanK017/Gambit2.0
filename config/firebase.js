@@ -1,6 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
+import { getStorage } from "firebase/storage";
 import Constants from "expo-constants";
 // Firebase config
 const firebaseConfig = {
@@ -12,6 +13,7 @@ const firebaseConfig = {
   appId: "1:157371860426:web:faa97c6c318dffa38abb33",
   measurementId: "G-WGJ34TT6N9",
   databaseURL:"https://task-gambit-cd2b0-default-rtdb.firebaseio.com/",
+  storageBucket:"gs://task-gambit-cd2b0.appspot.com",
   //   @deprecated is deprecated Constants.manifest
 };
 // initialize firebase
@@ -19,5 +21,6 @@ initializeApp(firebaseConfig);
 const app = initializeApp(firebaseConfig);
 export const firestore = getFirestore(app);
 export const auth = getAuth(app);
+export const storage=getStorage(app);
 
 

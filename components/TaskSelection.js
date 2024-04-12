@@ -1,10 +1,41 @@
 import { LinearGradient } from 'expo-linear-gradient';
 import React, { useEffect, useState } from 'react';
+import { collection, onSnapshot } from 'firebase/firestore';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { firestore } from '../config/firebase'; // Import the initialized Firestore instance
 
-const tasks = ['Task 1', 'Task 2', 'Task 3'];
+
+const tasks = ['Task 1', 'Task 2', 'Task 3']; 
+
+
+
+
+
 
 const Dropdown = ({navigation}) => {
+  const [groupsCollectionRef, setGroupsCollectionRef] = useState(null);
+  const [groups, setGroups] = useState([]);
+  const handleContinuePress=()=>{
+    navigation.navigate('Chat');
+  }
+
+    useEffect(() => {
+    const ref = collection(firestore, 'cbof');
+    setGroupsCollectionRef(ref);
+
+    const unsubscribe = onSnapshot(ref, (groups) => {
+      console.log('Current groups in database: ', groups);
+      const groupsData = groups.docs.map((doc) => {
+        return { id: doc.id, ...doc.data() };
+      });
+      console.log('Current groups in database: ', groupsData);
+
+      setGroups(groupsData);
+    });
+
+    return unsubscribe;
+  }, []);
+
   const [isLoading, setIsLoading] = useState(true); // Initial loading state
   const [selectedTask, setSelectedTask] = useState('');
   const [dropdownVisible, setDropdownVisible] = useState(false);
@@ -21,17 +52,20 @@ const Dropdown = ({navigation}) => {
     setSelectedTask(task);
     setDropdownVisible(false);
   };
-  const handleClick =()=>{
-    navigation.navigate('Chat');
-  }
-
+ 
   const content = ( // Separate component for content
     
       <View style={styles.contentContainer}> {/* Wrap content in styled View */}
-      <View style={styles.partnerInfo}> {/* Container for partner info */}
-        <Text style={styles.found}>PARTNER FOUND  :
-        <Text style={styles.wiz}>Dazling_Wiz </Text></Text>
-      </View>
+       <View style={styles.partnerInfo}> {/* Container for partner info */}
+       {groups.map((group) => (
+        <>
+            <Text style={styles.found} key={group.id}z>PARTNER FOUND:</Text>
+            <Text style={styles.wiz}>{group.Username} </Text>
+            <Text style={styles.found}>Task:</Text>
+            <Text style={styles.wiz}>{group.Task} </Text>
+        </>
+        ))}
+           </View>
       <TouchableOpacity style={styles.dropdown} onPress={() => setDropdownVisible(!dropdownVisible)}>
         <Text style={styles.dropdownText}>{selectedTask || 'Select a task'}</Text>
       </TouchableOpacity>
@@ -44,7 +78,7 @@ const Dropdown = ({navigation}) => {
           ))}
         </View>
       )}
-      <TouchableOpacity style={styles.continueButton} onPress={handleClick}>
+      <TouchableOpacity style={styles.continueButton} onPress={handleContinuePress}>
         <Text style={styles.continueButtonText}>Continue</Text>
       </TouchableOpacity>
     </View>

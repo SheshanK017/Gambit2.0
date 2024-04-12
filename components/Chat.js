@@ -14,12 +14,13 @@ import {
   onSnapshot
 } from 'firebase/firestore';
 import { signOut } from 'firebase/auth';
-import { auth, firestore } from '../config/firebase.js';
+import { auth, firestore,storage} from '../config/firebase.js';
 import { useNavigation } from '@react-navigation/native';
 import { AntDesign } from '@expo/vector-icons';
 import TopTabBar from './TopTabBar.js';
 import { View } from 'react-native-web';
 // import colors from '../colors';
+import * as ImagePicker from 'expo-image-picker';
 
 export default function Chat() {
   const [messages, setMessages] = useState([]);
@@ -78,15 +79,46 @@ export default function Chat() {
     });
   }, []);
 
-  return (
-    <View style={{ flex: 1 }}>
+ const uploadImageToFirebase = async (uri) => {
+  const response = await fetch(uri);
+  const blob = await response.blob();
+  const imageName = `images/${Date.now()}`;
+
+  const ref = firebase.storage().ref().child(imageName);
+  await ref.put(blob);
+
+  return ref.getDownloadURL();
+};
+
+const pickImage = async () => {
+  const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+  if (status !== 'granted') {
+    console.log('Permission denied!');
+    return;
+  }
+
+  const result = await ImagePicker.launchImageLibraryAsync({
+    mediaTypes: ImagePicker.MediaTypeOptions.Images,
+    allowsEditing: true,
+    aspect: [4, 3],
+    quality: 1,
+  });
+
+  if (!result.cancelled) {
+    const imageUrl = await uploadImageToFirebase(result.uri);
+    console.log('Image uploaded to Firebase:', imageUrl);
+    // You can save the imageUrl to your database or use it as needed
+  }
+};
+
+
+return (
+  <View style={{ flex: 1 }}>
     <TopTabBar
       navigation={navigation}
       timerValue={timerValue} // Pass timer value if available
       coinsLeft={coinsLeft} // Pass coins left if available
     />
-   
- 
     <GiftedChat
       messages={messages}
       showAvatarForEveryMessage={false}
@@ -103,8 +135,11 @@ export default function Chat() {
         _id: auth?.currentUser?.email,
         avatar: 'https://i.pravatar.cc/300'
       }}
-
     />
-     </View>
-  );
+    <TouchableOpacity onPress={pickImage}>
+      <Text>UPLOAD</Text>
+    </TouchableOpacity>
+  </View>
+);
+
 }
