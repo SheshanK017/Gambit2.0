@@ -5,21 +5,21 @@ import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { firestore } from '../config/firebase'; // Import the initialized Firestore instance
 
 
-const tasks = ['Task 1', 'Task 2', 'Task 3']; 
+const tasks = ['Gym', 'Coding', 'Running'];
 
 
 
 
 
 
-const Dropdown = ({navigation}) => {
+const Dropdown = ({ navigation }) => {
   const [groupsCollectionRef, setGroupsCollectionRef] = useState(null);
   const [groups, setGroups] = useState([]);
-  const handleContinuePress=()=>{
+  const handleContinuePress = () => {
     navigation.navigate('Chat');
   }
 
-    useEffect(() => {
+  useEffect(() => {
     const ref = collection(firestore, 'cbof');
     setGroupsCollectionRef(ref);
 
@@ -52,20 +52,20 @@ const Dropdown = ({navigation}) => {
     setSelectedTask(task);
     setDropdownVisible(false);
   };
- 
+
   const content = ( // Separate component for content
-    
-      <View style={styles.contentContainer}> {/* Wrap content in styled View */}
-       <View style={styles.partnerInfo}> {/* Container for partner info */}
-       {groups.map((group) => (
-        <>
-            <Text style={styles.found} key={group.id}z>PARTNER FOUND:</Text>
+
+    <View style={styles.contentContainer}> {/* Wrap content in styled View */}
+      <View style={styles.partnerInfo}> {/* Container for partner info */}
+        {groups.map((group) => (
+          <>
+            <Text style={styles.found} key={group.id} z>PARTNER FOUND:</Text>
             <Text style={styles.wiz}>{group.Username} </Text>
             <Text style={styles.found}>Task:</Text>
             <Text style={styles.wiz}>{group.Task} </Text>
-        </>
+          </>
         ))}
-           </View>
+      </View>
       <TouchableOpacity style={styles.dropdown} onPress={() => setDropdownVisible(!dropdownVisible)}>
         <Text style={styles.dropdownText}>{selectedTask || 'Select a task'}</Text>
       </TouchableOpacity>
@@ -86,21 +86,21 @@ const Dropdown = ({navigation}) => {
 
   return (
     <LinearGradient
-    colors={[
-      '#2d3541',
-      '#5b5f6a',
-      '#8c8e95',
-      '#bfbfc3',
-      '#f4f4f4',
-    ]}
+      colors={[
+        '#2d3541',
+        '#5b5f6a',
+        '#8c8e95',
+        '#bfbfc3',
+        '#f4f4f4',
+      ]}
       style={styles.container}
     >
       {isLoading ? ( // Conditionally render loading message
         <Text style={styles.loadingText}>FINDING OPPONENT...</Text>
       ) : (
         <View style={styles.content}> {/* Wrap content in styled View */}
-        {content}
-      </View> // Render actual content after loading
+          {content}
+        </View> // Render actual content after loading
       )}
     </LinearGradient>
   );
@@ -115,17 +115,17 @@ const styles = StyleSheet.create({
   loadingText: {
     fontSize: 20,
     color: '#0B1D39',
-    fontWeight:"800"
+    fontWeight: "800"
   },
   contentContainer: {
-    justifyContent: 'center', 
-    alignItems: 'center', 
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   partnerInfo: {
     backgroundColor: 'rgba(255, 255, 255, 0.1)', // Set background color to red
     borderRadius: 10, // Add border radius
     padding: 35,
-    marginBottom:20 // Add padding for better spacing
+    marginBottom: 20 // Add padding for better spacing
   },
   content: {
     flex: 1, // Make content take up full height (optional)
@@ -135,7 +135,7 @@ const styles = StyleSheet.create({
   dropdown: {
     height: 40,
     width: '100%',
-   
+
     borderColor: '#0B1D39',
     borderWidth: 3,
     borderRadius: 40,
@@ -143,7 +143,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: 30,
-    backgroundColor:"#0B1D39"
+    backgroundColor: "#0B1D39"
   },
   dropdownText: {
     color: 'white',
@@ -154,8 +154,8 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderRadius: 10,
     maxHeight: 200,
-    overflow: 'hidden', 
-    backgroundColor:"#0B1D39"
+    overflow: 'hidden',
+    backgroundColor: "#0B1D39"
 
   },
   dropdownItem: {
@@ -163,7 +163,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     borderBottomWidth: 1,
     borderBottomColor: '#0B1D39',
-    backgroundColor:"#0B1D39"
+    backgroundColor: "#0B1D39"
   },
   dropdownItemText: {
     color: 'white',
@@ -173,32 +173,32 @@ const styles = StyleSheet.create({
   continueButton: {
     paddingVertical: 15,
     paddingHorizontal: 30,
-   
+
     borderColor: '#0B1D39',
     borderWidth: 2,
     borderRadius: 40,
     marginTop: 20,
-    backgroundColor:'#0B1D39'
+    backgroundColor: '#0B1D39'
   },
   continueButtonText: {
-    color:'white',
+    color: 'white',
     textAlign: 'center',
     fontSize: 16,
   },
-  found:{
-    color:"#0B1D39",
+  found: {
+    color: "#0B1D39",
     textAlign: 'center',
     fontSize: 16,
-    marginBottom:10,
-    marginRight:10,marginLeft:10,
-    fontWeight:"700"
+    marginBottom: 10,
+    marginRight: 10, marginLeft: 10,
+    fontWeight: "700"
   },
-  wiz:{
-    fontSize:20,
-    fontWeight:"bold",
-    textAlign:"center",
-    color:"#2356A4",
-    marginLeft:10
+  wiz: {
+    fontSize: 20,
+    fontWeight: "bold",
+    textAlign: "center",
+    color: "#2356A4",
+    marginLeft: 10
   }
 });
 

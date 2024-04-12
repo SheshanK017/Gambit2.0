@@ -103,7 +103,7 @@ const Contact = ({ navigation }) => {
           style={styles.loginButton}
           onPress={() => navigation.navigate('Login')}
         >
-          Already have an account? Login
+          Already have an account?   Login
         </Text>
       </View>
     </LinearGradient>
@@ -167,7 +167,13 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     fontSize: 30
 
-  }
+  },
+  loginButton: {
+    marginTop: 20, // Add margin to the top of the login text
+    fontSize: 14,
+    textAlign: "center"
+  },
+
 });
 
 export default Contact;

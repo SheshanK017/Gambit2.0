@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, Image } from 'react-native';
 
 const TopTabBar = ({ navigation, timerValue, coinsLeft }) => {
   const [isTimerVisible, setIsTimerVisible] = useState(false);
@@ -18,7 +18,11 @@ const TopTabBar = ({ navigation, timerValue, coinsLeft }) => {
         <Text style={styles.timerText}>{timerValue || '00:00'}</Text>
       </TouchableOpacity>
       {/* Coins display */}
-      <Text style={styles.coinsText}>{coinsLeft || '100'} Coins</Text>
+      <View style={styles.coinsContainer}>
+        <Image source={require('../assets/coin.png')} style={styles.coinImage} />
+        <Text style={styles.coinsText}>{coinsLeft || '1000'} </Text>
+
+      </View>
     </View>
   );
 };
@@ -30,12 +34,21 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: 10,
     backgroundColor: '#f0f0f0',
-    padding:20,
-    zIndex:1 // Light background color
+    padding: 10,
+    zIndex: 1 // Light background color
   },
   timerText: {
     fontSize: 16,
     fontWeight: 'bold',
+  },
+  coinsContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  coinImage: {
+    width: 50,
+    height: 50,
+    marginRight: 5, // Adjust as needed
   },
   coinsText: {
     fontSize: 16,

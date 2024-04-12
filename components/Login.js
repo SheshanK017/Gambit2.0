@@ -73,10 +73,12 @@ const Contact = ({ navigation }) => {
           <Text style={styles.buttonText}>LOGIN</Text>
         </TouchableOpacity>
         <Text
-          onPress={() => navigation.navigate('contactpage')}
+          style={styles.loginButton} onPress={() => navigation.navigate('contactpage')}
         >
-          Don't have an account? Register
+          Don't have an account?
+          Register
         </Text>
+
       </View>
     </LinearGradient>
   );
@@ -114,6 +116,14 @@ const styles = StyleSheet.create({
     color: 'white',
     backgroundColor: '#0B1D39'
   },
+  loginButton: {
+    marginTop: 20, // Add margin to the top of the login text
+    fontSize: 20,
+    textAlign: "center",
+
+
+  },
+
   button: {
     paddingVertical: 15,
     paddingHorizontal: 30,

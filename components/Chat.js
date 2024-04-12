@@ -14,7 +14,7 @@ import {
   onSnapshot
 } from 'firebase/firestore';
 import { signOut } from 'firebase/auth';
-import { auth, firestore,storage} from '../config/firebase.js';
+import { auth, firestore, storage } from '../config/firebase.js';
 import { useNavigation } from '@react-navigation/native';
 import { AntDesign } from '@expo/vector-icons';
 import TopTabBar from './TopTabBar.js';
@@ -41,7 +41,7 @@ export default function Chat() {
           }}
           onPress={onSignOut}
         >
-          <AntDesign name="logout" size={24} color={colors.gray} style={{marginRight: 10}}/>
+          <AntDesign name="logout" size={24} color={colors.gray} style={{ marginRight: 10 }} />
         </TouchableOpacity>
       )
     });
@@ -70,7 +70,7 @@ export default function Chat() {
       GiftedChat.append(previousMessages, messages)
     );
     // setMessages([...messages, ...messages]);
-    const { _id, createdAt, text, user } = messages[0];    
+    const { _id, createdAt, text, user } = messages[0];
     addDoc(collection(firestore, 'chats'), {
       _id,
       createdAt,
@@ -79,67 +79,83 @@ export default function Chat() {
     });
   }, []);
 
- const uploadImageToFirebase = async (uri) => {
-  const response = await fetch(uri);
-  const blob = await response.blob();
-  const imageName = `images/${Date.now()}`;
+  const uploadImageToFirebase = async (uri) => {
+    const response = await fetch(uri);
+    const blob = await response.blob();
+    const imageName = `images/${Date.now()}`;
 
-  const ref = firebase.storage().ref().child(imageName);
-  await ref.put(blob);
+    const ref = firebase.storage().ref().child(imageName);
+    await ref.put(blob);
 
-  return ref.getDownloadURL();
+    return ref.getDownloadURL();
+  };
+
+  const pickImage = async () => {
+    const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+    if (status !== 'granted') {
+      console.log('Permission denied!');
+      return;
+    }
+
+    const result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+
+    if (!result.cancelled) {
+      const imageUrl = await uploadImageToFirebase(result.uri);
+      console.log('Image uploaded to Firebase:', imageUrl);
+      // You can save the imageUrl to your database or use it as needed
+    }
+  };
+
+
+  return (
+    <View style={{ flex: 1 }}>
+      <TopTabBar
+        navigation={navigation}
+        timerValue={timerValue} // Pass timer value if available
+        coinsLeft={coinsLeft} // Pass coins left if available
+      />
+      <GiftedChat
+        messages={messages}
+        showAvatarForEveryMessage={false}
+        showUserAvatar={false}
+        onSend={messages => onSend(messages)}
+        messagesContainerStyle={{
+          backgroundColor: '#0B1D39'
+        }}
+        textInputStyle={{
+          backgroundColor: 'white',
+          borderRadius: 20,
+        }}
+        user={{
+          _id: auth?.currentUser?.email,
+          avatar: 'https://i.pravatar.cc/300'
+        }}
+      />
+      <TouchableOpacity onPress={pickImage}>
+        <Text style={styles.uploadButtonText}>UPLOAD</Text>
+      </TouchableOpacity>
+    </View>
+  );
+
 };
 
-const pickImage = async () => {
-  const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
-  if (status !== 'granted') {
-    console.log('Permission denied!');
-    return;
-  }
+const styles = {
+  uploadButtonText: {
+    marginTop: 10, // Adjust the margin top as needed
+    paddingVertical: 10, // Keep vertical padding the same
+    paddingHorizontal: 15, // Keep horizontal padding the same
+    backgroundColor: '#0B1D39', // Example background color
+    borderRadius: 20, // Example border radius
+    color: 'white', // Example text color
+    fontWeight: 'bold', // Example text weight
+    textAlign: 'center', // Center the text horizontally
+    width: 120, // Set a specific width for the button
+    alignSelf: 'center',
 
-  const result = await ImagePicker.launchImageLibraryAsync({
-    mediaTypes: ImagePicker.MediaTypeOptions.Images,
-    allowsEditing: true,
-    aspect: [4, 3],
-    quality: 1,
-  });
-
-  if (!result.cancelled) {
-    const imageUrl = await uploadImageToFirebase(result.uri);
-    console.log('Image uploaded to Firebase:', imageUrl);
-    // You can save the imageUrl to your database or use it as needed
-  }
+  },
 };
-
-
-return (
-  <View style={{ flex: 1 }}>
-    <TopTabBar
-      navigation={navigation}
-      timerValue={timerValue} // Pass timer value if available
-      coinsLeft={coinsLeft} // Pass coins left if available
-    />
-    <GiftedChat
-      messages={messages}
-      showAvatarForEveryMessage={false}
-      showUserAvatar={false}
-      onSend={messages => onSend(messages)}
-      messagesContainerStyle={{
-        backgroundColor: '#0B1D39'
-      }}
-      textInputStyle={{
-        backgroundColor: 'white',
-        borderRadius: 20,
-      }}
-      user={{
-        _id: auth?.currentUser?.email,
-        avatar: 'https://i.pravatar.cc/300'
-      }}
-    />
-    <TouchableOpacity onPress={pickImage}>
-      <Text>UPLOAD</Text>
-    </TouchableOpacity>
-  </View>
-);
-
-}
